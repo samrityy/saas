@@ -201,3 +201,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+#ignore vedor static files
+src/staticfiles/vendors
+
+#ignore the static file root 
+local-cdn/
