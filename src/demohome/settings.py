@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,11 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ybo_q$zxy@p!-f_2x4ceis=_c@q=!_w&nr&&bbjz0d_$x2s2rm"
+SECRET_KEY = config("DJANGO_SECRET_KEY" )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+# DEBUG = True
+DEBUG = config("DJANGO_DEBUG", cast=bool)
+print(f"DEBUG: {DEBUG}")
 ALLOWED_HOSTS = [
     ".railway.app"
 ]
@@ -88,7 +91,18 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
+DATABASE_URL= config("DATABASE_URL", default=None, cast=str)
+CONN_MAX_AGE = config("CONN_MAX_AGE", default=0, cast=int)
+print(f"DATABASE_URL: {DATABASE_URL}")
+if DATABASE_URL is not None:
+    import dj_database_url
+    DATABASES={ 
+        "default": dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=CONN_MAX_AGE, 
+            conn_health_checks= True,
+        )
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
