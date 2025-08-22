@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     #my apps
     "traffic",
+    "commando",
 ]
 
 MIDDLEWARE = [
