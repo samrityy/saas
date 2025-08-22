@@ -94,7 +94,7 @@ DATABASES = {
 }
 DATABASE_URL= config("DATABASE_URL", default=None, cast=str)
 CONN_MAX_AGE = config("CONN_MAX_AGE", default=0, cast=int)
-print(f"DATABASE_URL: {config('DJANGO_SECRET_KEY')}")
+
 if DATABASE_URL is not None:
     import dj_database_url
     DATABASES={ 
@@ -141,6 +141,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_BASE_DIR = BASE_DIR / "staticfiles"
+STATICFILES_BASE_DIR.mkdir(exist_ok=True)
 STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / "vendor"
 
 STATICFILES_DIRS=[
