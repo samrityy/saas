@@ -4,3 +4,4 @@ python-decouple  # for fot envvariables
 psycopg[binary]  # PostgreSQL adapter for Python
 dj-database-url
 requests
+whitenoise  # for serving static files in production
