@@ -74,16 +74,17 @@ INSTALLED_APPS = [
     
     #third party apps
     "allauth_ui",
-    "allauth.socialaccount.providers.github",
-    "widget_tweaks",
     "slippers",
     
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    "allauth.socialaccount.providers.github",
+    
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.github',
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -180,6 +181,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
+    "github":{
+        "VERIFIED_EMAIL": True,
+    }
 }
 
 # Internationalization
